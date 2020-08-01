@@ -6,6 +6,7 @@ let signUser = require("../middleware/post.js").signUser;
 let createPost = require("../middleware/post.js").createPost;
     // GET
 let getPost = require("../middleware/get.js").getPost;
+let getPosts = require("../middleware/get.js").getPosts;
 const router = Router(); 
 
 // ENTRY POINT 
@@ -17,7 +18,7 @@ router.get("/", (req, res)=>{
 });
 
 // GET ALL POSTS 
-router.get("/post")
+router.get("/post", getPosts);
 
 // GET ALL USERS 
 //router.get("/users", getAllUsers);

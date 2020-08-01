@@ -1,5 +1,11 @@
 let Post = require("../models/post.js");
 
+async function getPosts(req, res){
+    let posts = await Post.find({});
+    console.log("Posts : ", posts);
+    res.send({posts});
+};
+
 async function getPost(req, res){
     try{
         var titleToFind = req.params.title;
@@ -12,4 +18,4 @@ async function getPost(req, res){
     }
 };
 
-module.exports = {getPost}
+module.exports = {getPost, getPosts}

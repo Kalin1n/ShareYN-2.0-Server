@@ -11,6 +11,8 @@ let getPosts = require("../middleware/get.js").getPosts;
 let updatePost = require("../middleware/update.js").updatePost;
 let changePassword = require("../middleware/update.js").changePassword;
     // DELETE
+let deleteUser = require("../middleware/delete.js").deleteUser;
+let deletePost = require("../middleware/delete.js").deletePost;
 
 const router = Router(); 
 // ENTRY POINT 
@@ -39,13 +41,13 @@ router.post("/signIn", signUser); // DONE
     // UPDATE POST 
 router.put("/post", updatePost); // DONE 
     // UPDATE USER
-router.put("/user", changePassword);
+router.put("/user", changePassword); // DONE
 
 // DELETE 
-    // DELET POST 
-router.delete("/post")
+    // DELET POST                           
+router.delete("/post", deletePost);
     // DELETE USER
-router.delete("/user")
+router.delete("/user", deleteUser); // DONE
 
 
 

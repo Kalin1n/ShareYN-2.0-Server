@@ -1,7 +1,7 @@
 let User = require("../models/user.js");
 let Post = require("../models/post.js");
-let createToken = require("./tokenfunctions.js");
-let verify = require("./tokenfunctions.js");
+let createToken = require("./tokenfunctions.js").createToken;
+let verify = require("./tokenfunctions.js").verify;
 
 async function createUser(req, res){
     try{

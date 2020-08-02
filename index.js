@@ -6,7 +6,8 @@ let mongoose = require("mongoose");
 let router = require("./router/index.js");
 
 // GET ENV VARIABLES 
-require("dotenv").config();
+let env = require("dotenv").config();
+console.log("ENV  variables : ", env);
 
 var dataBase = "mongodb+srv://kalinin:001d0fc8f72b@cluster0-ffkvc.mongodb.net/shareyn?retryWrites=true&w=majority"
 mongoose.connect(dataBase,{ 

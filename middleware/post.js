@@ -1,16 +1,7 @@
 let User = require("../models/user.js");
 let Post = require("../models/post.js");
-let jwt = require("jsonwebtoken");
-
-
-// JWT TOKEN 
-function createToken(email, id){
-    return jwt.sign({email, id}, "secret")
-}
-
-function verify(token){
-    return jwt.verify(token, "secret");
-}
+let createToken = require("./tokenfunctions.js");
+let verify = require("./tokenfunctions.js");
 
 async function createUser(req, res){
     try{

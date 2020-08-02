@@ -7,8 +7,12 @@ let createPost = require("../middleware/post.js").createPost;
     // GET
 let getPost = require("../middleware/get.js").getPost;
 let getPosts = require("../middleware/get.js").getPosts;
-const router = Router(); 
+    // UPDATE 
+let updatePost = require("../middleware/update.js").updatePost;
+let changePassword = require("../middleware/update.js").changePassword;
+    // DELETE
 
+const router = Router(); 
 // ENTRY POINT 
 router.get("/", (req, res)=>{ 
     res.send({
@@ -17,20 +21,32 @@ router.get("/", (req, res)=>{
     });
 });
 
-// GET ALL POSTS 
-router.get("/post", getPosts);
+// GET
+    // ALL POSTS 
+router.get("/post", getPosts);  // DONE 
+    // ONE POST 
+router.get("/post/:title", getPost); // DONE
 
-// GET ALL USERS 
-//router.get("/users", getAllUsers);
+// POST 
+    //CREATE POST
+router.post("/post", createPost); // DONE
+    // REGISTRATION
+router.post("/register", createUser); // DONE
+    // LOGIN IN
+router.post("/signIn", signUser); // DONE
 
-// GET ONE POST 
-router.get("/post/:title", getPost);
+// UPDATE 
+    // UPDATE POST 
+router.put("/post", updatePost); // DONE 
+    // UPDATE USER
+router.put("/user", changePassword);
 
-// POST ONE POST 
-router.post("/post", createPost);
+// DELETE 
+    // DELET POST 
+router.delete("/post")
+    // DELETE USER
+router.delete("/user")
 
-router.post("/register", createUser);
 
-router.post("/signIn", signUser)
 
 module.exports = router;

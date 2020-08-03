@@ -1,5 +1,6 @@
 let Post = require("../models/post.js");
-const User = require("../models/user.js");
+let User = require("../models/user.js");
+let Comment = require("../models/coment.js");
 let verify = require("../middleware/tokenfunctions.js").verify;
 
 async function updatePost(req, res){
@@ -39,5 +40,31 @@ async function changePassword(req, res){
     }
 }; 
 
+async function addComment(req, res){
+    try{ 
+        let {text, postTitle} = req.body;
+        console.log("ADD COMMENT REQUEST : ", text, postTitle);
+        var token = req.headers["authorization"].split(" ")[1];
+        var candidate = verify(token);
+        console.log(candidate);
+        if(candidate){
+            let post = await Post.findOne({title: postTitle});
+            if(post){
+                var newComment = new Comment({
+                    text : text, 
+                    postId : post._id,
+                    commentator : candidate.id
+                });
+                newComment.save().catch( (error)=> {throw error});
+                res.send({message : "Comment added", status : 200});
+            }
+        }else{
+            res.send({message : "User unveryfied", status : 404});
+        }
+    }
+    catch(error){
+        res.send({error, message: "Comment cant be added", status : 404});
+    }
+};
 
-module.exports = {updatePost, changePassword};
+module.exports = {updatePost, changePassword, addComment};

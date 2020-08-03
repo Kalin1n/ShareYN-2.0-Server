@@ -1,4 +1,5 @@
 let Post = require("../models/post.js");
+const User = require("../models/user.js");
 
 async function getPosts(req, res){
     let posts = await Post.find({});
@@ -10,6 +11,7 @@ async function getPost(req, res){
     try{
         var titleToFind = req.params.title;
         let post = await Post.findOne({title : titleToFind});
+        console.log("Post from db : ",post)
         let {title, text } = post;
         post ? res.send({ title, text, status : 200}) : res.send({status : 200})
     }
@@ -18,4 +20,9 @@ async function getPost(req, res){
     }
 };
 
-module.exports = {getPost, getPosts}
+async function getUserPosts(req, res){
+    var candidate = req.params;
+    console.log(candidate)
+};
+
+module.exports = {getPost, getPosts, getUserPosts};

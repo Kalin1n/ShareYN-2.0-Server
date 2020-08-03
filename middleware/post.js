@@ -19,7 +19,7 @@ async function createUser(req, res){
         }
         else{
             res.send({status : 404, message : "Problem occured"});
-        }
+        };
     }
     catch(error){
         console.log("Error : ", error);
@@ -29,8 +29,8 @@ async function createUser(req, res){
 
 async function signUser(req, res){ 
     try{
-        console.log("LOGGIN USER REQUEST : ", req.body);
         var {email, password} = req.body;
+        console.log("LOGGIN USER REQUEST : ", email, password);
         let candidate =  await User.findOne({email : email});
         if(candidate.password == password){
             res.send({message : "User logged", status : 200, token : createToken(candidate.email, candidate._id)});
@@ -47,8 +47,8 @@ async function signUser(req, res){
 
 async function createPost(req, res){
     try{
-        console.log("POST CREATE REQUEST : ", req.body);
         var {title, text} = req.body;
+        console.log("POST CREATE REQUEST", title, text);
         var token = req.headers["authorization"].split(" ")[1];
         let data = verify(token);
         if(data){
@@ -68,4 +68,6 @@ async function createPost(req, res){
         res.send({message : "POST CANT BE CREATED", status : 404})
     }
 };
+
+
 module.exports = {createUser, signUser, createPost};

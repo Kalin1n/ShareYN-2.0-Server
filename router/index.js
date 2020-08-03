@@ -7,9 +7,11 @@ let createPost = require("../middleware/post.js").createPost;
     // GET
 let getPost = require("../middleware/get.js").getPost;
 let getPosts = require("../middleware/get.js").getPosts;
+let getUserPosts = require("../middleware/get.js").getUserPosts;
     // UPDATE 
 let updatePost = require("../middleware/update.js").updatePost;
 let changePassword = require("../middleware/update.js").changePassword;
+let addComment = require("../middleware/update.js").addComment;
     // DELETE
 let deleteUser = require("../middleware/delete.js").deleteUser;
 let deletePost = require("../middleware/delete.js").deletePost;
@@ -29,23 +31,27 @@ router.get("/post", getPosts);  // DONE
     // ONE POST 
 router.get("/post/:title", getPost); // DONE
 
-// POST 
+router.get("/user/?user", getUserPosts); 
+
+// POST     
     //CREATE POST
 router.post("/post", createPost); // DONE
     // REGISTRATION
 router.post("/register", createUser); // DONE
     // LOGIN IN
-router.post("/signIn", signUser); // DONE
+router.post("/signIn", signUser); // DONE 
 
 // UPDATE 
     // UPDATE POST 
 router.put("/post", updatePost); // DONE 
     // UPDATE USER
 router.put("/user", changePassword); // DONE
+    // COMMENT POST
+router.put("/post/comment", addComment); 
 
 // DELETE 
     // DELET POST                           
-router.delete("/post", deletePost);
+router.delete("/post", deletePost); // DONE
     // DELETE USER
 router.delete("/user", deleteUser); // DONE
 

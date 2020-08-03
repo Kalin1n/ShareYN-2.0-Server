@@ -12,7 +12,8 @@ let UserSchema = new mongoose.Schema({
     password : {
         type : String, 
         required : true
-    }
+    },
+    posts : [{type : mongoose.Types.ObjectId, ref :"Post"}]
 });
 
 let User = mongoose.model("User", UserSchema);

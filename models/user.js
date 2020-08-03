@@ -13,7 +13,8 @@ let UserSchema = new mongoose.Schema({
         type : String, 
         required : true
     },
-    posts : [{type : mongoose.Types.ObjectId, ref :"Post"}]
+    posts : [{type : mongoose.Types.ObjectId, ref :"Post"}],
+    comments : [{type : mongoose.Types.ObjectId, ref :"Comment"}]
 });
 
 let User = mongoose.model("User", UserSchema);

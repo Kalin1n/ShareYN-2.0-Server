@@ -10,8 +10,10 @@ async function getPosts(req, res){
 async function getPost(req, res){
     try{
         var titleToFind = req.params.title;
-        let post = await Post.findOne({title : titleToFind});
-        console.log("Post from db : ",post)
+        console.log(titleToFind);
+        var post = await ( await Post.findOne({title : titleToFind}).populate());
+        console.log("Post from db : ", post);
+        console.log(post.comments);
         let {title, text } = post;
         post ? res.send({ title, text, status : 200}) : res.send({status : 200})
     }
@@ -20,9 +22,17 @@ async function getPost(req, res){
     }
 };
 
+async function getUser(req, res){
+    var candidate = req.params.user;
+    console.log(candidate);
+    var user = await (await User.findOne({email : candidate}).populate("posts"));
+    console.log("USER FROM DB : ", user);
+    res.send({status : 200});
+};
+
 async function getUserPosts(req, res){
     var candidate = req.params;
     console.log(candidate)
 };
 
-module.exports = {getPost, getPosts, getUserPosts};
+module.exports = {getPost, getUser, getPosts, getUserPosts};

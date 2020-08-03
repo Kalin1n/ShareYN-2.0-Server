@@ -7,7 +7,7 @@ let createPost = require("../middleware/post.js").createPost;
     // GET
 let getPost = require("../middleware/get.js").getPost;
 let getPosts = require("../middleware/get.js").getPosts;
-let getUserPosts = require("../middleware/get.js").getUserPosts;
+let getUser = require("../middleware/get.js").getUser;
     // UPDATE 
 let updatePost = require("../middleware/update.js").updatePost;
 let changePassword = require("../middleware/update.js").changePassword;
@@ -31,7 +31,7 @@ router.get("/post", getPosts);  // DONE
     // ONE POST 
 router.get("/post/:title", getPost); // DONE
 
-router.get("/user/?user", getUserPosts); 
+router.get("/user/:user", getUser); 
 
 // POST     
     //CREATE POST

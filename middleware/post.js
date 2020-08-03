@@ -15,7 +15,7 @@ async function createUser(req, res){
         await candidate.save().catch( (error)=> {throw error})
         let newUser =  await User.findOne({name : name, email : email});
         if(newUser){
-            res.send({status : 200, token : createToken(newUser.name, newUser._id)});    
+            res.send({status : 200, token : createToken(newUser.email, newUser._id)});    
         }
         else{
             res.send({status : 404, message : "Problem occured"});
@@ -51,15 +51,19 @@ async function createPost(req, res){
         console.log("POST CREATE REQUEST", title, text);
         var token = req.headers["authorization"].split(" ")[1];
         let data = verify(token);
+        console.log(data);
         if(data){
             let candidate = await User.findOne({email : data.email});
             if(candidate){
                 let newPost = Post({
                     title : title,
                     text : text,
-                    creator : candidate._id
+                    creator : candidate.id
                 });
-                await newPost.save().catch( (error)=> {throw error});
+                newPost.creator = candidate;
+                newPost.save().catch(err=> {throw err});    
+                candidate.posts.push(newPost);
+                await candidate.save().catch(err=> {throw err});
                 res.send({message : "POST CREATED ", status : 200})
             }
         }

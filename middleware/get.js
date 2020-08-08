@@ -27,7 +27,7 @@ async function getUser(req, res){
     console.log(candidate);
     var user = await (await User.findOne({email : candidate}).populate("posts"));
     console.log("USER FROM DB : ", user);
-    res.send({status : 200});
+    res.send({status : 200, user});
 };
 
 async function getUserPosts(req, res){

@@ -31,7 +31,7 @@ router.get("/post", getPosts);  // DONE
     // ONE POST 
 router.get("/post/:title", getPost); // DONE
 
-router.get("/user/:user", getUser); 
+router.get("/user/:user", getUser); // DONES
 
 // POST     
     //CREATE POST

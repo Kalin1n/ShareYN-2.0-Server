@@ -11,11 +11,8 @@ async function getPost(req, res){
     try{
         var titleToFind = req.params.title;
         console.log(titleToFind);
-        var post = await ( await Post.findOne({title : titleToFind}).populate());
-        console.log("Post from db : ", post);
-        console.log(post.comments);
-        let {title, text } = post;
-        post ? res.send({ title, text, status : 200}) : res.send({status : 200})
+        var post = await ( await Post.findOne({title : titleToFind}).populate("creator"));
+        post ? res.send({ post, status : 200}) : res.send({status : 404})
     }
     catch(error){
         res.send({message : error, status : 404});
